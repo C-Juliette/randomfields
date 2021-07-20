@@ -7,9 +7,17 @@ Authors@R:
            role = c("aut", "cre"),
            email = "chiapellojuliette@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: This package considers randomly generated matrix as maps. It plots the maps and indicates the variance and the distribution of a realization. It does moving average to generate new maps which are spatially structured. It calculates the covariance between points on spatial structured maps. And it subsamples maps, with or without an average of the neighbored points.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    scales,
+    ggplot2,
+    stringr,
+    viridis
