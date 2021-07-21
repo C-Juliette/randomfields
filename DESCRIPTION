@@ -21,4 +21,6 @@ Imports:
     scales,
     ggplot2,
     stringr,
-    viridis
+    viridis,
+    cowplot,
+    rlist
