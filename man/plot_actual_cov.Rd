@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_actual_cov.R
 \name{plot_actual_cov}
 \alias{plot_actual_cov}
-\title{Title}
+\title{plot_actua_covarnce}
 \usage{
 plot_actual_cov(
   Z,
@@ -54,7 +54,7 @@ plot_actual_cov(
 a plot
 }
 \description{
-Title
+plot_actua_covarnce
 }
 \examples{
 plot_actual_cov(matrix(rnorm(1:50), nrow = 10), c(1,2), list(c(0,1), c(1,1)), max = 20)

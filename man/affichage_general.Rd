@@ -4,7 +4,14 @@
 \alias{affichage_general}
 \title{Affichage matrices boxplots et histogrammes}
 \usage{
-affichage_general(Z, r, titre = "", paletteinf = "", palettesup = "")
+affichage_general(
+  Z,
+  r,
+  titre = "",
+  paletteinf = "",
+  palettesup = "",
+  mmechelle = FALSE
+)
 }
 \arguments{
 \item{Z}{matrice}
@@ -16,6 +23,8 @@ affichage_general(Z, r, titre = "", paletteinf = "", palettesup = "")
 \item{paletteinf}{to fix color on the scale}
 
 \item{palettesup}{to fix color on the scale}
+
+\item{mmechelle}{to set the two same scales TRUE/FALSE}
 }
 \value{
 a plot
