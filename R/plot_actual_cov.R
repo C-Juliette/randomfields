@@ -1,4 +1,4 @@
-#' Title
+#' plot_actua_covarnce
 #'
 #' @param Z a matrix
 #' @param les_rayons radius of the moving average (vector)
@@ -49,9 +49,11 @@ plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="",
   }
 
   p <- p +
-    viridis::scale_color_viridis(discrete = TRUE, option = "B")+
+    viridis::scale_color_viridis(discrete = TRUE, option = "B")
     #scale_shape(solid = T)+
-    labs(x = xlabs ,
+    if (max != ""){p <- p +  ggplot2::xlim(min=0, max = max) }
+   if (maxy_sup != ""){p <- p +  ylim(min=maxy_inf, max = maxy_sup) }
+    p <- p + labs(x = xlabs ,
          y = ylabs,
          shape = "Direction",
          color = rayon)+
@@ -61,7 +63,6 @@ plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="",
       legend.box.just = "right",
       legend.margin = margin(6, 6, 6, 6)
     )
-  if (max != ""){p <- p +  ggplot2::xlim(min=0, max = max) }
-  if (maxy_sup != ""){p <- p +  ylim(min=maxy_inf, max = maxy_sup) }
+
   return(p)
 }
