@@ -64,5 +64,9 @@ plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="Di
       legend.margin = margin(6, 6, 6, 6)
     ) +
       guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))
+    if(length(les_rayons) == 1){
+       if(les_rayons == 0){
+      p <- p + guides(col = "none")}
+    }
   return(p)
 }

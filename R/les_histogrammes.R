@@ -18,8 +18,8 @@ les_histogrammes <- function(Z,Y, titre = 'Histogrammes', nom_axeX = "", nom_axe
   Y <- as.data.frame(Y)
 
   p <- ggplot() +
-    ggplot2::geom_histogram(data = Y, aes(x = Y, y=..count../sum(..count..)), color="black", fill= "#F8766D")+
-    ggplot2::geom_histogram(data = Z, aes(x = Z, y=..count../sum(..count..)), color="black", fill="#01BDC2", alpha=0.5)+
+    ggplot2::geom_histogram(data = Y, aes(x = Y, y=..count../sum(..count..)), color="black", fill= "#01BDC2")+
+    ggplot2::geom_histogram(data = Z, aes(x = Z, y=..count../sum(..count..)), color="black", fill="#F8766D", alpha=0.5)+
 
     labs(title = titre,
          x = nom_axeX,

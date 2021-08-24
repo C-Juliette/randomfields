@@ -35,11 +35,17 @@ for (i in 1:length(x)){
 
 sortie
 for (i in 1:(length(sortie)-1)){
-  if (! (is.na(sortie[i]) || is.na(sortie[i+1]))){
+  while (! (is.na(sortie[i]) || is.na(sortie[i+1]))){
     sortie[i] <- stringr::str_c(sortie[i], sortie[i+1])
     sortie[i+1] <- NA
   }
 }
+
+# emplacementNa <- c()
+# for (i in 1:(length(sortie)-1)){
+#   if(is.na(sortie[i])){emplacementNa <- append(emplacementNa, i)}
+# }
+
 
 sortie
 
