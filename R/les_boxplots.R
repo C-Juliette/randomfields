@@ -17,6 +17,7 @@ les_boxplots <- function(Z, Y, titre = "Boxplots", nom_axeX = "", nom_axeY = "")
   dataZ <- data.frame(Grille = rep("Z", length(Z)), Valeurs = Z)
   dataY <- data.frame(Grille = rep("Y", length(Y)), Valeurs = Y)
   data <- rbind(dataZ, dataY)
+  data$Grille <- factor(data$Grille , levels=c("Z", "Y"))
 
   p <- ggplot(data, aes(x = Grille, y = Valeurs, fill = Grille))+
     ggplot2::geom_boxplot() +
