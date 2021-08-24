@@ -29,7 +29,7 @@ margin <- ggplot2::margin
 #'
 #' @examples
 #' plot_expected_cov(1, c(1,2,3), list(c(0,1), c(1,1), c(1,2)))
-plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Distance (pixel unit)", ylabs ="Expected covariance",  x = "Distance_pixels", y = "Expected_covariance", rayon = "Radius_pixels",  the_scale = 1,  max = "", maxy_sup ="", maxy_inf="", connect = TRUE, director_vector = TRUE){
+plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Distance between variables", ylabs ="Theoritical covariance",  x = "Distance_pixels", y = "Expected_covariance", rayon = "Radius_pixels",  the_scale = 1,  max = "", maxy_sup ="", maxy_inf="", connect = TRUE, director_vector = TRUE){
   df <- data_frame_expected_cov(sigma_Z, the_radius, the_directions, the_scale)
   ################COVARIANCE###################@
   if(y == "Expected_covariance"){
@@ -42,6 +42,10 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
       if (rayon == "Radius_pixels"){p <- p + geom_line(aes(col = factor(Radius_pixels), group = interaction(Direction, Radius_pixels)))}
       if (rayon == "Radius_km_unit"){p <- p + geom_line(aes(col = factor(Radius_km_unit), group = interaction(Direction, Radius_km)))}
     }
+
+
+
+    #return(p)
   }
   ###########CORRELATION###############
   if(y == "Expected_correlation"){
@@ -54,14 +58,11 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
       if (rayon == "Radius_pixels"){p <- p + geom_line(aes(col = factor(Radius_pixels)))}
       if (rayon == "Radius_km_unit"){p <- p + geom_line(aes(col = factor(Radius_km_unit)))}
     }
+
   }
 
   p <- p +
     viridis::scale_color_viridis(discrete = TRUE, option = "B")+
-    labs(x = xlabs ,
-         y = ylabs,
-         shape = "Direction",
-         color = rayon)+
     theme(
       legend.position = c(.95, .95),
       legend.justification = c("right", "top"),
@@ -71,5 +72,10 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
   if (max != ""){p <- p + scale_x_continuous(breaks = pretty_breaks()) + xlim(min=0, max = max)
   }
   if (maxy_sup != ""){p <- p +  ylim(min = maxy_inf, max = maxy_sup) }
+  p <- p +
+    guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))+
+    labs(x = xlabs, y = ylabs)
+
+
   return(p)
 }

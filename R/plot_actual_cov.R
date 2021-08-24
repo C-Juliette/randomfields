@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' plot_actual_cov(matrix(rnorm(1:50), nrow = 10), c(1,2), list(c(0,1), c(1,1)), max = 20)
-plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="", x = "Distance_pixels", y = "Empirical_covariance", rayon = "Rayon_pixels",  echelle = 1,  max = "", maxy_sup = "", maxy_inf = "" , relier = TRUE,vecteur_directeur = TRUE){
+plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="Distance between variables", x = "Distance_pixels", y = "Empirical_covariance", rayon = "Rayon_pixels",  echelle = 1,  max = "", maxy_sup = "", maxy_inf = "" , relier = TRUE,vecteur_directeur = TRUE){
   df <- data_frame_actual_covariance(Z, les_rayons, les_directions, echelle)
 
   ################COVARIANCE###################@
@@ -62,7 +62,7 @@ plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="",
       legend.justification = c("right", "top"),
       legend.box.just = "right",
       legend.margin = margin(6, 6, 6, 6)
-    )
-
+    ) +
+      guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))
   return(p)
 }
