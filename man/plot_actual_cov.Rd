@@ -9,7 +9,7 @@ plot_actual_cov(
   les_rayons,
   les_directions,
   ylabs = "",
-  xlabs = "",
+  xlabs = "Distance between variables",
   x = "Distance_pixels",
   y = "Empirical_covariance",
   rayon = "Rayon_pixels",
