@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_actual_cov.R
 \name{plot_actual_cov}
 \alias{plot_actual_cov}
-\title{plot_actua_covarnce}
+\title{plot_actual_covariance}
 \usage{
 plot_actual_cov(
   Z,
@@ -10,9 +10,9 @@ plot_actual_cov(
   les_directions,
   ylabs = "",
   xlabs = "Distance between variables",
-  x = "Distance_pixels",
+  x = "Distance",
   y = "Empirical_covariance",
-  rayon = "Rayon_pixels",
+  rayon = "Radius",
   echelle = 1,
   max = "",
   maxy_sup = "",
@@ -36,7 +36,7 @@ plot_actual_cov(
 
 \item{y}{y parametre}
 
-\item{rayon}{"Rayon_pixels" or "Rayon_km" (radius unit)}
+\item{rayon}{"Radius" or "Rayon_km" (radius unit)}
 
 \item{echelle}{scale}
 
@@ -54,7 +54,7 @@ plot_actual_cov(
 a plot
 }
 \description{
-plot_actua_covarnce
+plot_actual_covariance
 }
 \examples{
 plot_actual_cov(matrix(rnorm(1:50), nrow = 10), c(1,2), list(c(0,1), c(1,1)), max = 20)

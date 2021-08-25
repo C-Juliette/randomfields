@@ -4,10 +4,10 @@
 \alias{charactervector_as_vector}
 \title{charactervector_as_vector}
 \usage{
-charactervector_as_vector(x)
+charactervector_as_vector(chaine)
 }
 \arguments{
-\item{x}{Ex : x <- "(0, 1)" a string}
+\item{chaine}{Ex : x <- "(0, 1)" a string}
 }
 \value{
 a vector Ex : c(0, 1)

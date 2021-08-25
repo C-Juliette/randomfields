@@ -24,4 +24,5 @@ Imports:
     viridis,
     cowplot,
     rlist,
-    stats
+    stats,
+    plotly
