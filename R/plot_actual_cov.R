@@ -19,33 +19,34 @@
 #' @export
 #'
 #' @examples
-#' plot_actual_cov(matrix(rnorm(1:50), nrow = 10), c(1,2), list(c(0,1), c(1,1)), max = 20)
+#' plot_actual_cov(matrix(rnorm(10000, 0, 1), nrow = 100), c(1,2), list(c(0,1), c(1,1)), max = 20)
 plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="Distance between variables", x = "Distance", y = "Empirical_covariance", rayon = "Radius",  echelle = 1,  max = "", maxy_sup = "", maxy_inf = "" , relier = TRUE,vecteur_directeur = TRUE){
   df <- data_frame_actual_covariance(Z, les_rayons, les_directions, echelle)
-  colnames(df) <- c("Distance", "Distance_km", "Empirical_covariance", "Empirical_correlation", "Direction", "Radius", "Rayon_km")
-
+  colnames(df) <- c("Distance", "Distance_km", "Empirical_covariance", "Empirical_correlation", "Direction", "Radius", "Radius_km")
+  df$Radius <- as.factor(df$Radius)
+  df$Radius_km <- as.factor(df$Radius_km)
   ################COVARIANCE###################@
   if(y == "Empirical_covariance"){
     if(x == "Distance"){p <- ggplot(data = df, aes(x = Distance, y = Empirical_covariance))}
     if(x == "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Empirical_covariance))}
-    if (rayon == "Radius"){p <- p + geom_point(aes(group = interaction(Direction, Radius), col = factor(Radius)))}
-    if (rayon == "Rayon_km"){p <- p + geom_point(aes(shape=Direction, col = factor(Rayon_km)))}
+    if (rayon == "Radius"){p <- p + geom_point(aes(group = interaction(Radius,Direction), col = Radius, shape = Direction))}
+    if (rayon == "Radius_km"){p <- p + geom_point(aes(col = Radius_km, shape=Direction))}
 
     if(relier == TRUE){
-      if (rayon == "Radius"){p <- p + geom_line(aes(group = interaction(Direction, Radius), col = factor(Radius)))}
-      if (rayon == "Rayon_km"){p <- p + geom_line(aes(group = interaction(Direction, Radius), col = factor(Rayon_km)))}
+      if (rayon == "Radius"){p <- p + geom_line(aes(group = interaction(Radius, Direction), col = Radius, shape = Direction))}
+      if (rayon == "Radius_km"){p <- p + geom_line(aes(group = interaction(Direction, Radius), col = Direction, shape = Radius_km))}
     }
   }
   ###########CORRELATION###############
   if(y == "Empirical_correlation"){
     if(x == "Distance"){p <- ggplot(data = df, aes(x = Distance, y = Empirical_correlation))}
     if(x == "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Empirical_correlation))}
-    if (rayon == "Radius"){p <- p + geom_point(aes(shape = Direction, col = factor(Radius)))}
-    if (rayon == "Rayon_km"){p <- p + geom_point(aes(shape = Direction, col = factor(Rayon_km)))}
+    if (rayon == "Radius"){p <- p + geom_point(aes(shape = Direction, col = Radius))}
+    if (rayon == "Radius_km"){p <- p + geom_point(aes(col = Direction, shape = Rayon_km))}
 
     if(relier == TRUE){
-      if (rayon == "Radius"){p <- p + geom_line(aes(shape=Direction, col = factor(Radius)))}
-      if (rayon == "Rayon_km"){p <- p + geom_line(aes(shape=Direction, col = factor(Rayon_km)))}
+      if (rayon == "Radius"){p <- p + geom_line(aes(shape = Direction, col = Radius))}
+      if (rayon == "Radius_km"){p <- p + geom_line(aes(col=Direction, shape = Rayon_km))}
     }
   }
 
@@ -65,12 +66,12 @@ plot_actual_cov <- function(Z,les_rayons,les_directions,  ylabs = "", xlabs ="Di
       legend.margin = margin(6, 6, 6, 6)
     ) +
       guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))
-    if(length(les_rayons) == 1){
-       if(les_rayons == 0){
-      p <- p + guides(col = "none")}
-    }
-  gg_ply <- plotly::ggplotly(p) |>
-    plotly::layout(legend = list(title=list(text="Radius r \n of the \n moving average's \n window"))) |>
-    plotly::layout(legend = list(orientation = "v", x = 0.6, y = 0.99))
-  return(gg_ply)
+    # if(length(les_rayons) == 1){
+    #    if(les_rayons == 0){
+    #   p <- p + guides(col = "none")}
+    # }
+  # gg_ply <- plotly::ggplotly(p) |>
+  #   plotly::layout(legend = list(title=list(text="Radius r \n of the \n moving average's \n window"))) |>
+  #   plotly::layout(legend = list(orientation = "v", x = 0.6, y = 0.99))
+  return(p)
 }

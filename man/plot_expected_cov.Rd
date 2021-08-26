@@ -10,9 +10,9 @@ plot_expected_cov(
   the_directions,
   xlabs = "Distance between variables",
   ylabs = "Theoritical covariance",
-  x = "Distance_pixels",
-  y = "Expected_covariance",
-  rayon = "Radius_pixels",
+  x = "Distance",
+  y = "Theoritical_covariance",
+  rayon = "Radius",
   the_scale = 1,
   max = "",
   maxy_sup = "",
@@ -32,11 +32,11 @@ plot_expected_cov(
 
 \item{ylabs}{the label of y axis}
 
-\item{x}{A string : "Distance_pixels" by default, or "Distance_km"}
+\item{x}{A string : "Distance" by default, or "Distance_km"}
 
 \item{y}{A string : ""Expected covariance"" by default, or "Expected correlation}
 
-\item{rayon}{A string for the unit of radius : "Radius_pixels" by default, or "Radius_km"}
+\item{rayon}{A string for the unit of radius : "Radius" by default, or "Radius_km"}
 
 \item{the_scale}{how many km/pixel}
 

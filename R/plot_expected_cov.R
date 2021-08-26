@@ -14,9 +14,9 @@ margin <- ggplot2::margin
 #' @param the_directions ex : list(c(0,1), c(1,1))
 #' @param xlabs the label of x axis
 #' @param ylabs the label of y axis
-#' @param x A string : "Distance_pixels" by default, or "Distance_km"
+#' @param x A string : "Distance" by default, or "Distance_km"
 #' @param y A string : ""Expected covariance"" by default, or "Expected correlation
-#' @param rayon A string for the unit of radius : "Radius_pixels" by default, or "Radius_km"
+#' @param rayon A string for the unit of radius : "Radius" by default, or "Radius_km"
 #' @param the_scale how many km/pixel
 #' @param max the maximum value for x axis (the minimum is always zero)
 #' @param maxy_sup the maximum value for y axis
@@ -29,18 +29,21 @@ margin <- ggplot2::margin
 #'
 #' @examples
 #' plot_expected_cov(1, c(1,2,3), list(c(0,1), c(1,1), c(1,2)))
-plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Distance between variables", ylabs ="Theoritical covariance",  x = "Distance_pixels", y = "Expected_covariance", rayon = "Radius_pixels",  the_scale = 1,  max = "", maxy_sup ="", maxy_inf="", connect = TRUE, director_vector = TRUE){
+plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Distance between variables", ylabs ="Theoritical covariance",  x = "Distance", y = "Theoritical_covariance", rayon = "Radius",  the_scale = 1,  max = "", maxy_sup ="", maxy_inf="", connect = TRUE, director_vector = TRUE){
   df <- data_frame_expected_cov(sigma_Z, the_radius, the_directions, the_scale)
+  colnames(df) <- c("Distance", "Distance_km", "Theoritical_covariance", "Theoritical_correlation", "Direction", "Radius", "Radius_km")
   ################COVARIANCE###################@
-  if(y == "Expected_covariance"){
-    if(x== "Distance_pixels"){p <- ggplot(data = df, aes(x = Distance_pixels, y = Expected_covariance))}
-    if(x== "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Expected_covariance))}
-    if (rayon == "Radius_pixels"){p <- p + geom_point(aes(col = factor(Radius_pixels), shape = Direction))}
-    if (rayon == "Radius_km_unit"){p <- p + geom_point(aes(col = factor(Radius_km_unit), shape  = Direction))}
+  df$Radius <- as.factor(df$Radius)
+  df$Radius_km <- as.factor(df$Radius_km)
+  if(y == "Theoritical_covariance"){
+    if(x== "Distance"){p <- ggplot(data = df, aes(x = Distance, y = Theoritical_covariance))}
+    if(x== "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Theoritical_covariance))}
+    if (rayon == "Radius"){p <- p + geom_point(aes(col = Radius, shape = Direction))}
+    if (rayon == "Radius_km"){p <- p + geom_point(aes(col = Radius_km, shape  = Direction))}
 
     if(connect == TRUE){
-      if (rayon == "Radius_pixels"){p <- p + geom_line(aes(col = factor(Radius_pixels), group = interaction(Direction, Radius_pixels)))}
-      if (rayon == "Radius_km_unit"){p <- p + geom_line(aes(col = factor(Radius_km_unit), group = interaction(Direction, Radius_km)))}
+      if (rayon == "Radius"){p <- p + geom_line(aes(col = Radius, group = interaction(Direction, Radius)))}
+      if (rayon == "Radius_km"){p <- p + geom_line(aes(col = Radius_km, group = interaction(Direction, Radius_km)))}
     }
 
 
@@ -48,15 +51,15 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
     #return(p)
   }
   ###########CORRELATION###############
-  if(y == "Expected_correlation"){
-    if(x== "Distance_pixels"){p <- ggplot(data = df, aes(x = Distance_pixels, y = Expected_correlation))}
-    if(x== "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Expected_correlation))}
-    if (rayon == "Radius_pixels"){p <- p + geom_point(aes(shape = Direction, col = factor(Radius_pixels)))}
-    if (rayon == "Radius_km_unit"){p <- p + geom_point(aes(shape = Direction, col = factor(Radius_km_unit)))}
+  if(y == "Theoritical_correlation"){
+    if(x== "Distance"){p <- ggplot(data = df, aes(x = Distance, y = Theoritical_correlation))}
+    if(x== "Distance_km"){p <- ggplot(data = df, aes(x = Distance_km, y = Theoritical_correlation))}
+    if (rayon == "Radius"){p <- p + geom_point(aes(shape = Direction, col = factor(Radius)))}
+    if (rayon == "Radius_km"){p <- p + geom_point(aes(shape = Direction, col = factor(Radius_km_unit)))}
 
     if(connect == TRUE){
-      if (rayon == "Radius_pixels"){p <- p + geom_line(aes(col = factor(Radius_pixels)))}
-      if (rayon == "Radius_km_unit"){p <- p + geom_line(aes(col = factor(Radius_km_unit)))}
+      if (rayon == "Radius"){p <- p + geom_line(aes(col = factor(Radius)))}
+      if (rayon == "Radius_km"){p <- p + geom_line(aes(col = factor(Radius_km_unit)))}
     }
 
   }
@@ -75,7 +78,10 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
   p <- p +
     guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))+
     labs(x = xlabs, y = ylabs)
+  gg_ply <- plotly::ggplotly(p) #|>
+  #     #plotly::layout(legend = list(title=list(text="Radius r \n of the \n moving average's \n window"))) |>
+  #     plotly::layout(legend = list(orientation = "v", x = 0.6, y = 0.99))
+  gg_ply <- plotly::hide_legend(gg_ply)
 
-
-  return(p)
+  return(gg_ply)
 }

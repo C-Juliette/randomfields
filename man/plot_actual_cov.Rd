@@ -57,5 +57,5 @@ a plot
 plot_actual_covariance
 }
 \examples{
-plot_actual_cov(matrix(rnorm(1:50), nrow = 10), c(1,2), list(c(0,1), c(1,1)), max = 20)
+plot_actual_cov(matrix(rnorm(10000, 0, 1), nrow = 100), c(1,2), list(c(0,1), c(1,1)), max = 20)
 }
