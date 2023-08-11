@@ -11,13 +11,13 @@
 #' @examples
 #' moving_average(matrix(rnorm(10*10, 0,1), nrow = 10), r=2)
 moving_average <- function(Z, r){
-  if (!is.atomic(r)){stop("r must be a scalar")}
-  if (!is.numeric(r)){stop("r must be an integer")}
-  if (!iswholenumber(r)){stop("r must be an integer")}
-  if (r < 0 ){stop("r must be >= 0")}
-  if (!is.numeric(Z)){stop("Z must be a matrix of numbers")}
+  if (!is.atomic(r)){cli::cli_abort("r must be a scalar")}
+  if (!is.numeric(r)){cli::cli_abort("r must be an integer")}
+  if (!iswholenumber(r)){cli::cli_abort("r must be an integer")}
+  if (r < 0 ){cli::cli_abort("r must be >= 0")}
+  if (!is.numeric(Z)){cli::cli_abort("Z must be a matrix of numbers")}
   Z <- as.matrix(Z)
-  if ( 2*r+1 > dim(Z)[1] | 2*r+1 > dim(Z)[2]){stop("The grid must be larger than the window. Decrease r or increase the grid size")}
+  if ( 2*r+1 > dim(Z)[1] | 2*r+1 > dim(Z)[2]){cli::cli_abort("The grid must be larger than the window. Decrease r or increase the grid size")}
 
 
   nrowsZ <- dim(Z)[1]

@@ -29,7 +29,7 @@ scale_y_reverse <- ggplot2::scale_y_reverse
 plot_matrix <- function(M, r = "", paletteinf = "", palettesup = "", titre = "", nom_axeX = "", nom_axeY = "", echelle = "Scale"){
   # if (is.data.frame(M)){M <- as.matrix(M)}
   M <- t(M)
-  if (!is.numeric(M)){stop("M must contain numbers")}
+  if (!is.numeric(M)){cli::cli_abort("M must contain numbers")}
 
   if(titre == ""){titre <- stringr::str_c("Var = " ,as.character(round(variance(M), 4)),  sep = "")}
   else{titre <- stringr::str_c(titre, "  -  Var = " ,as.character(round(variance(M), 4)),  sep = "")}

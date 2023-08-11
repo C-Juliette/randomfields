@@ -12,7 +12,7 @@
 #' variance (matrix(rbinom(2*2, 1, 0.5), nrow = 2))
 #'
 variance <- function(M){
-  if (!is.vector(M) & !is.matrix(M)){stop("M must be a number/vector/matrix")}
-  if (!is.numeric(M)){stop("M must contain numeric values")}
+  if (!is.vector(M) & !is.matrix(M)){cli::cli_abort("M must be a number/vector/matrix")}
+  if (!is.numeric(M)){cli::cli_abort("M must contain numeric values")}
   return(mean(M**2, na.rm = TRUE) - mean(M, na.rm = TRUE)**2)
 }

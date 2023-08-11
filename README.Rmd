@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 # randomfields
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/C-Juliette/randomfields/workflows/R-CMD-check/badge.svg)](https://github.com/C-Juliette/randomfields/actions)
 [![R-CMD-check](https://github.com/C-Juliette/randomfields/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/C-Juliette/randomfields/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/C-Juliette/randomfields/branch/main/graph/badge.svg)](https://codecov.io/gh/C-Juliette/randomfields?branch=main)
 [![test-coverage](https://github.com/C-Juliette/randomfields/workflows/test-coverage/badge.svg)](https://github.com/C-Juliette/randomfields/actions)
@@ -31,4 +30,3 @@ You can install the released version of randomfields from [CRAN](https://CRAN.R-
 ``` r
 install.packages("randomfields")
 ```
-

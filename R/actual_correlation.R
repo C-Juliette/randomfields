@@ -15,11 +15,11 @@
 actual_correlation <- function(M, a_vector, scale = 1, vect_dir = T){
   #tests on M
   if(is.data.frame(M) | is.vector(M)){M <- as.matrix(M)}
-  if(!is.numeric(M)){stop("M must contain a vector, matrix or dataframe")}
+  if(!is.numeric(M)){cli::cli_abort("M must contain a vector, matrix or dataframe")}
   #tests on a_vector
-  if(!is.vector(a_vector)){stop("a_vector must contain a vector")}
-  if(length(a_vector) != 2){stop("a_vector must have 2 coordinates")}
-  if(!is.numeric(a_vector)){stop("a_vector must contain numbers")}
+  if(!is.vector(a_vector)){cli::cli_abort("a_vector must contain a vector")}
+  if(length(a_vector) != 2){cli::cli_abort("a_vector must have 2 coordinates")}
+  if(!is.numeric(a_vector)){cli::cli_abort("a_vector must contain numbers")}
   #end of tests
   if(vect_dir){vect_dir <- direction(a_vector)}
   else{vect_dir <- a_vector}
@@ -48,7 +48,7 @@ actual_correlation <- function(M, a_vector, scale = 1, vect_dir = T){
   }
   Distance_km <- Distance_pixels*scale
   result <- as.data.frame(cbind(Distance_pixels, Distance_km, Empirical_covariance, Empirical_correlation))
-  if(sum(is.nan(as.matrix(result))) == 1){warning("the result contains infinity NaN")}
+  if(sum(is.nan(as.matrix(result))) == 1){cli::cli_warn("the result contains infinity NaN")}
   return(result)
 }
 
