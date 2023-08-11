@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/C-Juliette/randomfields/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/C-Juliette/randomfields/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/C-Juliette/randomfields/branch/main/graph/badge.svg)](https://codecov.io/gh/C-Juliette/randomfields?branch=main)
-[![test-coverage](https://github.com/C-Juliette/randomfields/workflows/test-coverage/badge.svg)](https://github.com/C-Juliette/randomfields/actions)
+[![test-coverage](https://github.com/C-Juliette/randomfields/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/C-Juliette/randomfields/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 This package considers randomly generated matrix as maps. It plots the
