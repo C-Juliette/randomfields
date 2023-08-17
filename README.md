@@ -54,5 +54,117 @@ variables are obtained.
 You can install the package randomfields from github :
 
 ``` r
-devtools::install_github("https://github.com/C-Juliette/randomfields")
+remotes::install_github("https://github.com/C-Juliette/randomfields")
 ```
+
+## Génération d’un champ aléatoire qui suit une loi normale
+
+On souhaite générer un champ aléatoire de taille 100x100. Chacun des
+10000 points correspond à une réalisation d’une variables aléatoire.
+Toutes les variables aléatoires sont indépendantes et identiquement
+distribuées (iid) suivant une loi normale centrée réduite.
+
+``` r
+library(randomfields)
+my_random_field <- gen_norm(100)
+```
+
+On peut visualiser ce champ (cette loi normale en 2D) :
+
+``` r
+plot_matrix(my_random_field)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+## Corrélation entre les points
+
+Les variables sont-elles corrélées ?
+
+Le vecteur indique la direction dans laquelle on se place pour étudier
+la corrélation. C’est un vecteur directeur (ici il s’agit de la
+corrélation des points selon la direction (0, 1)).
+
+``` r
+actual_correlation(my_random_field, c(0,1)) |> 
+  head(10)
+#>    Distance_pixels Distance_km Empirical_covariance Empirical_correlation
+#> 1                0           0          0.986281138           1.000000000
+#> 2                1           1         -0.019146179          -0.019420788
+#> 3                2           2         -0.012692623          -0.012865903
+#> 4                3           3          0.003849425           0.003902321
+#> 5                4           4         -0.007143487          -0.007234349
+#> 6                5           5          0.007290393           0.007374268
+#> 7                6           6          0.005337790           0.005410947
+#> 8                7           7          0.009107937           0.009238173
+#> 9                8           8          0.002470945           0.002510341
+#> 10               9           9         -0.008223944          -0.008345497
+```
+
+La corrélation est nulle (aux fluctuations statistiques près). La
+corrélation ne vaut 1 que lorsqu’on qu’on considère la corrélation de la
+variable avec elle-même (distance nulle).
+
+## Application d’un moyenne glissante
+
+On applique une fenêtre glissante carrée de côté r = 6 sur le champ
+aléatoire.
+
+``` r
+structured_field <- moving_average(my_random_field, r=6)
+```
+
+On peut visualiser ce champ :
+
+``` r
+plot_matrix(structured_field)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+Des structures sont apparues. La variance a diminué (les valeurs sont
+plus proches les unes des autres, la moyenne glissante “gomme” les
+écarts).
+
+Cela se retranscrit au niveau des corrélations :
+
+``` r
+actual_correlation(structured_field, c(0, 1)) |> 
+  head(10)
+#>    Distance_pixels Distance_km Empirical_covariance Empirical_correlation
+#> 1                0           0          0.005314522             1.0000000
+#> 2                1           1          0.004867543             0.9144647
+#> 3                2           2          0.004460263             0.8343929
+#> 4                3           3          0.004065093             0.7576574
+#> 5                4           4          0.003631647             0.6735605
+#> 6                5           5          0.003196727             0.5907091
+#> 7                6           6          0.002751031             0.5061640
+#> 8                7           7          0.002345434             0.4302699
+#> 9                8           8          0.001919511             0.3522825
+#> 10               9           9          0.001470961             0.2698426
+```
+
+Les variables aléatoires sont corrélées et leur corrélations diminue
+avec la distance qui les sépare.
+
+## Visualisation des graphiques de corrélation
+
+``` r
+plot_actual_cov(my_random_field, c(6), list(c(0, 1)), max = 20)
+#> Warning in geom_line(aes(group = interaction(Radius, Direction), col = Radius,
+#> : Ignoring unknown aesthetics: shape
+#> Warning: Removed 67 rows containing missing values (`geom_point()`).
+#> Warning: Removed 67 rows containing missing values (`geom_line()`).
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+``` r
+plot_actual_cov(my_random_field, c(6), list(c(0, 1)), max = 20)
+#> Warning in geom_line(aes(group = interaction(Radius, Direction), col = Radius,
+#> : Ignoring unknown aesthetics: shape
+#> Warning: Removed 67 rows containing missing values (`geom_point()`).
+#> Warning: Removed 67 rows containing missing values (`geom_line()`).
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
