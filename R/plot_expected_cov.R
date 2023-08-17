@@ -72,9 +72,9 @@ plot_expected_cov <- function(sigma_Z, the_radius, the_directions, xlabs ="Dista
       legend.box.just = "right",
       legend.margin = margin(6, 6, 6, 6)
     )
-  if (max != ""){p <- p + scale_x_continuous(breaks = pretty_breaks()) + xlim(min=0, max = max)
+  if (max != ""){p <- p + scale_x_continuous(breaks = scales::pretty_breaks()) # + xlim(min=0, max = max)
   }
-  if (maxy_sup != ""){p <- p +  ylim(min = maxy_inf, max = maxy_sup) }
+  if (maxy_sup != ""){p <- p } #+  ylim(min = maxy_inf, max = maxy_sup) }
   p <- p +
     guides(col = ggplot2::guide_legend("Radius r \n of the \n moving average's \n window"))+
     labs(x = xlabs, y = ylabs)
