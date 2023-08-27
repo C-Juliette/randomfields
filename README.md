@@ -11,6 +11,9 @@ coverage](https://codecov.io/gh/C-Juliette/randomfields/branch/main/graph/badge.
 [![test-coverage](https://github.com/C-Juliette/randomfields/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/C-Juliette/randomfields/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
+Shiny App associée :
+<https://juliette-chiapello.shinyapps.io/RandomFields/>
+
 – *English version below* –
 
 Le principe est de générer des champs aléatoires en 2D, puis de calculer
@@ -89,16 +92,16 @@ corrélation des points selon la direction (0, 1)).
 actual_correlation(my_random_field, c(0,1)) |> 
   head(10)
 #>    Distance_pixels Distance_km Empirical_covariance Empirical_correlation
-#> 1                0           0          0.986281138           1.000000000
-#> 2                1           1         -0.019146179          -0.019420788
-#> 3                2           2         -0.012692623          -0.012865903
-#> 4                3           3          0.003849425           0.003902321
-#> 5                4           4         -0.007143487          -0.007234349
-#> 6                5           5          0.007290393           0.007374268
-#> 7                6           6          0.005337790           0.005410947
-#> 8                7           7          0.009107937           0.009238173
-#> 9                8           8          0.002470945           0.002510341
-#> 10               9           9         -0.008223944          -0.008345497
+#> 1                0           0         0.9771622050          1.0000000000
+#> 2                1           1        -0.0003432377         -0.0003509797
+#> 3                2           2        -0.0018308075         -0.0018724473
+#> 4                3           3        -0.0008582630         -0.0008771434
+#> 5                4           4        -0.0138465606         -0.0141468923
+#> 6                5           5         0.0082628227          0.0084230526
+#> 7                6           6        -0.0012158138         -0.0012376256
+#> 8                7           7        -0.0020800520         -0.0021144567
+#> 9                8           8        -0.0011162387         -0.0011322669
+#> 10               9           9        -0.0142358961         -0.0144551643
 ```
 
 La corrélation est nulle (aux fluctuations statistiques près). La
@@ -132,16 +135,16 @@ Cela se retranscrit au niveau des corrélations :
 actual_correlation(structured_field, c(0, 1)) |> 
   head(10)
 #>    Distance_pixels Distance_km Empirical_covariance Empirical_correlation
-#> 1                0           0          0.005314522             1.0000000
-#> 2                1           1          0.004867543             0.9144647
-#> 3                2           2          0.004460263             0.8343929
-#> 4                3           3          0.004065093             0.7576574
-#> 5                4           4          0.003631647             0.6735605
-#> 6                5           5          0.003196727             0.5907091
-#> 7                6           6          0.002751031             0.5061640
-#> 8                7           7          0.002345434             0.4302699
-#> 9                8           8          0.001919511             0.3522825
-#> 10               9           9          0.001470961             0.2698426
+#> 1                0           0          0.005863657             1.0000000
+#> 2                1           1          0.005441513             0.9261279
+#> 3                2           2          0.005031841             0.8540028
+#> 4                3           3          0.004584651             0.7763849
+#> 5                4           4          0.004097430             0.6925498
+#> 6                5           5          0.003649708             0.6150813
+#> 7                6           6          0.003142876             0.5285943
+#> 8                7           7          0.002607207             0.4371363
+#> 9                8           8          0.002112413             0.3535144
+#> 10               9           9          0.001621311             0.2700478
 ```
 
 Les variables aléatoires sont corrélées et leur corrélations diminue

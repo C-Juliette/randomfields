@@ -22,6 +22,8 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
+Shiny App associée : https://juliette-chiapello.shinyapps.io/RandomFields/
+
 -- *English version below* --
 
 Le principe est de générer des champs aléatoires en 2D, puis de calculer leurs corrélations.  
